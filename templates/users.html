@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="../../static/style.css">
+     <title>Movie Template - user list</title>
+  </head>
+  <body>
+ <h1>User list</h1>
+
+
+  <h3><strong>{{ message }}</strong></h3>
+
+   <div class="form">
+
+       <h3><button class="btn btn-primary"><a href = "/">Home </a></button></h3>
+   </div>
+   {% if user_length > 0 %}
+   <div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+               <th>Username</th>
+               <th>About</th>
+               <th>Number of movies</th>
+                <th>Insert movies in user list</th>
+                 <th>Check movies user list</th>
+                 <th>Delete user</th>
+            </tr>
+         </thead>
+
+         <tbody>
+          {% for user in users %}
+
+               <tr>
+                  <td>{{ user.name }}</td>
+                   <td>
+                       {{user.about}}
+
+                   </td>
+                   <td>
+                         {{user.number_movies}}
+                   </td>
+                  <td><a href="/users/{{user.user_id}}" title="Check {{user.name}} list"  style="color:black">Check {{user.name}} list</a></td>
+                   <td><a href="/users/{{user.user_id}}/add_movie" title="Insert movies into {{user.name}} list"  style="color:black">Insert movies in {{user.name}} list</a></td>
+                  <td><a href="/users/{{user.user_id}}/delete" title="Delete {{user.name}}"  style="color:black">Delete user</a></td>
+               </tr>
+            {% endfor %}
+
+         </tbody>
+      </table>
+   </div>
+{% endif%}
+
+
+
+  </body>
+</html>

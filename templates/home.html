@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+       <link rel="stylesheet" href="../../static/style.css">
+      <title>Movie Template</title>
+   </head>
+   <body>
+  <h1>Movie database - latest movies</h1>
+  <h3><strong>{{ message }}</strong></h3>
+   <div class="form">
+
+   <form action="/" method="get">
+   <label for="search">Search for movies in the database by title:</label>
+<input type="text" id="search" name="search">
+       <br><br>
+        <input type="submit" value="Search">
+   </form>
+       <hr>
+       <br>
+       <br>
+       <h3><button class="btn btn-primary"><a href = "/add_user">Add User </a></button></h3>
+        <h3><button class="btn btn-primary"><a href = "/users">User List </a></button></h3>
+   </div>
+
+   {% if user_lenght > 0 %}
+   <div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+               <th class="image">Image</th>
+               <th>Title</th>
+               <th>Rating</th>
+               <th>Director</th>
+                 <th>Year</th>
+                <th>User</th>
+                <th>Check user movie list</th>
+                <th>Delete user</th>
+            </tr>
+         </thead>
+
+         <tbody>
+          {% for movie in movies %}
+
+               <tr>
+                   <td class="image"><img src="{{ movie.image }}" title="movie.title"  width="100" /></td>
+                  <td>{{ movie.title }}</td>
+                   <td>{{ movie.rating }}</td>
+                   <td>{{ movie.director }}</td>
+                   <td>{{ movie.year}}</td>
+                    <td>
+                        {% for user in users %}
+                       {% if user.user_id == movie.user_id %}
+                          {{user.name}}
+                       {% endif%}
+                     {% endfor %}
+
+                    </td>
+                   <td><a href="/users/{{movie.user_id}}" title="Check user " style="color:black">
+                          {% for user in users %}
+                       {% if user.user_id == movie.user_id %}
+                          Check {{user.name}} film list
+                       {% endif%}
+                     {% endfor %}
+
+                   </a></td>
+                   <td><a href="/user/{{movie.user_id}}/delete" title="Delete user" style="color:black">Delete user</a></td>
+               </tr>
+            {% endfor %}
+
+
+         </tbody>
+      </table>
+        </div>
+{% endif%}
+
+
+   </body>
+</html>
